@@ -1,4 +1,3 @@
-import os
 import shutil
 from pathlib import Path
 import sys
@@ -6,7 +5,7 @@ import sys
 def organizarArchivos(path_str: str):
     path = Path(path_str)
 
-    if not path.exists():
+    if not path.is_dir():
         print(f"Error: El directorio {path_str} no existe")
         return
         
@@ -44,6 +43,5 @@ def organizarArchivos(path_str: str):
                 print(f"Se movio {file.name} a Otros")
         except (OSError, shutil.Error) as e:
             print(f"Error al mover {file.name}: {e}", file=sys.stderr)
-            return
-            
-    print ("Todos los archivos organizados correctamente")
+    
+    print ("Archivos organizados correctamente")
