@@ -24,7 +24,7 @@ Un conjunto de herramientas de línea de comandos diseñada para automatizar tar
     pip install -r requirements.txt
     ```
 
-## Recomiendo hacer un entorno virtual para evitar conflictos con paquetes
+> Recomiendo crear un entorno virtual para evitar conflictos con paquetes.
 
 ## **Uso**
 
