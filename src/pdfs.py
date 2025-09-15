@@ -93,3 +93,39 @@ def cambiar_nombre(ruta_archivo: str, nuevo_nombre: str):
     except Exception as e:
         print(f"Ocurrió un error:{e}", file=sys.stderr)
         return
+    
+def parser_pdf(parser):
+    subparsers = parser.add_subparsers(des="command", required=True, help="Comandos disponibles PDF")
+    
+    parser_merge = subparsers.add_parser(
+        "fusionar", help="Fusiona 2 archivos PDF en uno"
+    )
+    parser_merge.add_argument(
+        "-i", "--input", nargs='+', required=True, help="Lista de los archivos PDF a fusionar"
+    )
+    parser_merge.add_argument(
+        "-", "--output", nargs='+', required=True, help="La ruta donde se desea mandar el archivo"
+    )
+    parser_merge.set_defaults(func=merge_pdf)
+    
+    parser_split = subparsers.add_parser(
+        "dividir", help="Divide un archivo PDF en páginas individuales"
+    )
+    parser_split.add_argument(
+        "-i", "--input", nargs='+', required=True, help="El archivo PDF para dividir"
+    )
+    parser_split.add_argument(
+        "-o", "--output", nargs='+', help="Directorio para guardar las páginas divididas", default="."
+    )
+    parser_split.set_defaults(func=split_pdf)
+    
+    parser_renombrar = subparsers.add_parser(
+        "renombrar", help="Renombrar un archivo"
+    )
+    parser_renombrar.add_argument(
+        "-i", "--input", nargs='+', required=True, help="El archivo a renombrar"
+    )
+    parser_renombrar.add_argument(
+        "-o", "--output", nargs='+', required=True, help="El nuevo nombre"
+    )
+    parser_renombrar.set_defaults(func=split_pdf)
