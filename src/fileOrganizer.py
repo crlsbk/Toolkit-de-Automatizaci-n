@@ -32,7 +32,7 @@ def organizarArchivos(path_str: str):
                     if not folder.is_dir():
                         folder.mkdir()
                     shutil.move(file, folder / file.name)
-                    print (f"Se movio {file.name} correctamente")
+                    print(f"Se movio {file.name} correctamente")
                     organizado = True
                     break            
             if not organizado:
@@ -44,4 +44,4 @@ def organizarArchivos(path_str: str):
         except (OSError, shutil.Error) as e:
             print(f"Error al mover {file.name}: {e}", file=sys.stderr)
     
-    print ("Archivos organizados correctamente")
+    print("Archivos organizados correctamente")

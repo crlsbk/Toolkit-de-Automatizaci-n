@@ -95,37 +95,37 @@ def cambiar_nombre(ruta_archivo: str, nuevo_nombre: str):
         return
     
 def parser_pdf(parser):
-    subparsers = parser.add_subparsers(des="command", required=True, help="Comandos disponibles PDF")
+    subparsers = parser.add_subparsers(dest="pdf_command", required=True, help="Comandos disponibles para PDF")
     
     parser_merge = subparsers.add_parser(
         "fusionar", help="Fusiona 2 archivos PDF en uno"
     )
     parser_merge.add_argument(
-        "-i", "--input", nargs='+', required=True, help="Lista de los archivos PDF a fusionar"
+        "-i", "--input", nargs=2, required=True, help="Los 2 archivos PDF a fusionar"
     )
     parser_merge.add_argument(
-        "-", "--output", nargs='+', required=True, help="La ruta donde se desea mandar el archivo"
+        "-o", "--output", default=".", help="El directorio donde se guardará el archivo"
     )
-    parser_merge.set_defaults(func=merge_pdf)
+    parser_merge.set_defaults(func=lambda args: merge_pdf(args.input[0], args.input[1], args.output))
     
     parser_split = subparsers.add_parser(
-        "dividir", help="Divide un archivo PDF en páginas individuales"
+        "dividir", help="Crea un PDF hasta una página específica"
     )
     parser_split.add_argument(
-        "-i", "--input", nargs='+', required=True, help="El archivo PDF para dividir"
+        "-i", "--input", required=True, help="El archivo PDF a dividir"
     )
     parser_split.add_argument(
-        "-o", "--output", nargs='+', help="Directorio para guardar las páginas divididas", default="."
+        "-o", "--output", default=".", help="Directorio para guardar el nuevo PDF"
     )
-    parser_split.set_defaults(func=split_pdf)
+    parser_split.set_defaults(func=lambda args: split_pdf(args.input, args.output))
     
     parser_renombrar = subparsers.add_parser(
         "renombrar", help="Renombrar un archivo"
     )
     parser_renombrar.add_argument(
-        "-i", "--input", nargs='+', required=True, help="El archivo a renombrar"
+        "-i", "--input", required=True, help="El archivo a renombrar"
     )
     parser_renombrar.add_argument(
-        "-o", "--output", nargs='+', required=True, help="El nuevo nombre"
+        "-n", "--nombre", required=True, help="El nuevo nombre para el archivo"
     )
-    parser_renombrar.set_defaults(func=split_pdf)
+    parser_renombrar.set_defaults(func=lambda args: cambiar_nombre(args.input, args.nombre))
