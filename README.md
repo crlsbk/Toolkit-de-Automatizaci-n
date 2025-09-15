@@ -128,3 +128,7 @@ python3 main.py scraper -p "analista de datos" -g
 # Guardar vacantes en un directorio específico
 python3 main.py scraper -p "diseñador ux" -g ./resultados/
 ```
+
+---
+
+\*Este README fue generado por la IA y ligeramente modificado por mi; no tomo crédito de el.
